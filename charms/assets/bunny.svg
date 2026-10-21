@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bunny-body-grad" cx="45%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#FAF5FF"/>
+      <stop offset="100%" stop-color="#F3E8FF"/>
+    </radialGradient>
+    <linearGradient id="bunny-ear-pink" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FCE7F3"/>
+      <stop offset="60%" stop-color="#FBCFE8"/>
+      <stop offset="100%" stop-color="#F472B6"/>
+    </linearGradient>
+    <linearGradient id="bunny-ring-silver" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="50%" stop-color="#CBD5E1"/>
+      <stop offset="100%" stop-color="#64748B"/>
+    </linearGradient>
+    <linearGradient id="carrot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDBA74"/>
+      <stop offset="60%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#EA580C"/>
+    </linearGradient>
+    <filter id="bunny-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <!-- Top Hanging Charm Ring -->
+  <g class="oc-charm-loop">
+    <circle cx="50" cy="8" r="6" fill="none" stroke="url(#bunny-ring-silver)" stroke-width="2.5" filter="url(#bunny-shadow)"/>
+    <circle cx="50" cy="8" r="4.2" fill="none" stroke="#FFFFFF" stroke-width="0.8" opacity="0.8"/>
+    <rect x="47" y="13" width="6" height="4" rx="1.5" fill="url(#bunny-ring-silver)"/>
+  </g>
+
+  <!-- Left Floppy Ear -->
+  <g filter="url(#bunny-shadow)">
+    <path d="M 37 36 C 30 22, 22 10, 15 16 C 9 22, 20 38, 29 44 Z" fill="url(#bunny-body-grad)"/>
+    <path d="M 34 34 C 28 23, 22 14, 18 18 C 14 23, 22 35, 29 40 Z" fill="url(#bunny-ear-pink)"/>
+  </g>
+
+  <!-- Right Perky Upright Ear with folded tip -->
+  <g filter="url(#bunny-shadow)">
+    <path d="M 62 36 C 68 20, 72 8, 79 12 C 86 16, 75 32, 69 44 Z" fill="url(#bunny-body-grad)"/>
+    <path d="M 64 34 C 69 22, 72 13, 77 15 C 81 18, 73 30, 68 40 Z" fill="url(#bunny-ear-pink)"/>
+  </g>
+
+  <!-- Bunny Head -->
+  <ellipse cx="50" cy="52" rx="27" ry="24" fill="url(#bunny-body-grad)" filter="url(#bunny-shadow)"/>
+
+  <!-- Bunny Lower Body -->
+  <ellipse cx="50" cy="78" rx="24" ry="20" fill="url(#bunny-body-grad)" filter="url(#bunny-shadow)"/>
+
+  <!-- Cheeks Blush -->
+  <ellipse cx="32" cy="54" rx="5" ry="3.2" fill="#F472B6" opacity="0.45"/>
+  <ellipse cx="68" cy="54" rx="5" ry="3.2" fill="#F472B6" opacity="0.45"/>
+
+  <!-- Sparkly Anime Eyes -->
+  <g class="oc-bunny-eyes">
+    <!-- Left Eye -->
+    <ellipse cx="37" cy="48" rx="4.2" ry="5.2" fill="#3B0764"/>
+    <circle cx="35.5" cy="46" r="1.8" fill="#FFFFFF"/>
+    <circle cx="39" cy="50" r="0.9" fill="#FFFFFF"/>
+    <path d="M 35 43 Q 38 41 41 43" stroke="#A855F7" stroke-width="0.8" fill="none"/>
+
+    <!-- Right Eye -->
+    <ellipse cx="63" cy="48" rx="4.2" ry="5.2" fill="#3B0764"/>
+    <circle cx="61.5" cy="46" r="1.8" fill="#FFFFFF"/>
+    <circle cx="65" cy="50" r="0.9" fill="#FFFFFF"/>
+    <path d="M 59 43 Q 62 41 65 43" stroke="#A855F7" stroke-width="0.8" fill="none"/>
+  </g>
+
+  <!-- Cute Nose & Mouth -->
+  <ellipse cx="50" cy="53" rx="2.2" ry="1.6" fill="#F472B6"/>
+  <path d="M 46 56 Q 48.5 58 50 56 Q 51.5 58 54 56" fill="none" stroke="#4C1D95" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Tiny Mini Carrot in Arms -->
+  <g filter="url(#bunny-shadow)">
+    <!-- Carrot Leaves -->
+    <path d="M 46 70 C 44 65, 41 65, 43 68" stroke="#22C55E" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M 47 70 C 47 64, 49 63, 48 68" stroke="#16A34A" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <!-- Carrot Root -->
+    <polygon points="46,70 56,74 48,86" fill="url(#carrot-grad)"/>
+    <line x1="48" y1="74" x2="52" y2="75" stroke="#C2410C" stroke-width="0.8"/>
+    <line x1="47" y1="79" x2="50" y2="80" stroke="#C2410C" stroke-width="0.8"/>
+  </g>
+
+  <!-- Paws holding carrot -->
+  <g filter="url(#bunny-shadow)">
+    <ellipse cx="43" cy="74" rx="4.5" ry="3.8" fill="#FFFFFF"/>
+    <ellipse cx="57" cy="75" rx="4.5" ry="3.8" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Little Dangling Bunny Feet -->
+  <g filter="url(#bunny-shadow)">
+    <ellipse cx="36" cy="94" rx="6.5" ry="4.5" fill="#FFFFFF"/>
+    <ellipse cx="36" cy="94" rx="3.5" ry="2.2" fill="#FCE7F3"/>
+
+    <ellipse cx="64" cy="94" rx="6.5" ry="4.5" fill="#FFFFFF"/>
+    <ellipse cx="64" cy="94" rx="3.5" ry="2.2" fill="#FCE7F3"/>
+  </g>
+</svg>

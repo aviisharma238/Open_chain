@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Charms</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="brand">
+        <img src="icons/icon32.png" alt="Open Charms Logo" class="brand-icon">
+        <div class="brand-text">
+          <h1 class="brand-title">Open Charms</h1>
+          <span class="brand-version">v1.0.0 &bull; Open Source</span>
+        </div>
+      </div>
+      <label class="switch" title="Toggle charms on/off">
+        <input type="checkbox" id="masterToggle" checked>
+        <span class="slider round"></span>
+      </label>
+    </header>
+
+    <!-- Tab Status Banner -->
+    <div id="tabStatusBanner" class="status-banner active">
+      <span class="status-dot"></span>
+      <span id="tabStatusText" class="status-text">Active on this page</span>
+    </div>
+
+    <!-- Main Settings Form -->
+    <main id="mainControls" class="main-content">
+      <!-- Charm Collection Selector -->
+      <section class="section">
+        <div class="section-header">
+          <span class="section-title">Select Companion</span>
+          <span class="section-subtitle">Choose a hanging charm</span>
+        </div>
+        <div class="charm-grid" id="charmGrid">
+          <!-- Dynamically populated from charms.js -->
+        </div>
+      </section>
+
+      <!-- Geometry & Physics Sliders -->
+      <section class="section">
+        <div class="section-header">
+          <span class="section-title">Adjust Charm</span>
+        </div>
+
+        <!-- Charm Size -->
+        <div class="control-row">
+          <div class="label-group">
+            <label for="sizeSlider">Charm Size</label>
+            <span class="value-badge" id="sizeVal">85px</span>
+          </div>
+          <input type="range" id="sizeSlider" min="45" max="140" value="85" step="1" class="slider-input">
+        </div>
+
+        <!-- String Length -->
+        <div class="control-row">
+          <div class="label-group">
+            <label for="lengthSlider">String Length</label>
+            <span class="value-badge" id="lengthVal">130px</span>
+          </div>
+          <input type="range" id="lengthSlider" min="60" max="260" value="130" step="5" class="slider-input">
+        </div>
+
+        <!-- Swing Intensity -->
+        <div class="control-row">
+          <div class="label-group">
+            <label for="swingSlider">Swing Motion</label>
+            <span class="value-badge" id="swingVal">1.0x</span>
+          </div>
+          <input type="range" id="swingSlider" min="0.3" max="2.0" value="1.0" step="0.1" class="slider-input">
+        </div>
+
+        <!-- Chain Wavy Motion -->
+        <div class="control-row">
+          <div class="label-group">
+            <label for="waveSlider">Chain Wavy Motion</label>
+            <span class="value-badge" id="waveVal">1.0x</span>
+          </div>
+          <input type="range" id="waveSlider" min="0.0" max="2.0" value="1.0" step="0.1" class="slider-input">
+        </div>
+
+        <!-- Opacity -->
+        <div class="control-row">
+          <div class="label-group">
+            <label for="opacitySlider">Charm Opacity</label>
+            <span class="value-badge" id="opacityVal">100%</span>
+          </div>
+          <input type="range" id="opacitySlider" min="30" max="100" value="100" step="5" class="slider-input">
+        </div>
+      </section>
+
+      <!-- String Style & Accessories -->
+      <section class="section">
+        <div class="section-header">
+          <span class="section-title">String Style</span>
+        </div>
+        <div class="select-wrapper">
+          <select id="stringStyleSelect" class="custom-select">
+            <option value="golden-chain">✨ Golden Chain</option>
+            <option value="silver-chain">🥈 Silver Chain</option>
+            <option value="pastel-ribbon">🎀 Pastel Ribbon</option>
+            <option value="rainbow-thread">🌈 Rainbow Thread</option>
+            <option value="black-choker">🖤 Midnight Cord</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Charm Wardrobe & Accessories -->
+      <section class="section">
+        <div class="section-header">
+          <span class="section-title">Wardrobe & Accessories</span>
+          <span class="section-subtitle">Dress your buddy</span>
+        </div>
+        <div class="select-wrapper">
+          <select id="accessorySelect" class="custom-select">
+            <option value="none">✨ None (Au Naturel)</option>
+            <option value="crown">👑 Royal Crown</option>
+            <option value="witch-hat">🧙‍♀️ Witch Hat</option>
+            <option value="glasses">👓 Round Glasses</option>
+            <option value="flower">🌸 Sakura Sprout</option>
+            <option value="bowtie">🎀 Dapper Bowtie</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Toggles: Sound & Accessibility -->
+      <section class="section">
+        <div class="section-header">
+          <span class="section-title">Preferences</span>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-label-group">
+            <span class="toggle-title">Chime Sounds</span>
+            <span class="toggle-desc">Gentle bell sound when tapped</span>
+          </div>
+          <label class="switch-mini">
+            <input type="checkbox" id="soundToggle">
+            <span class="slider-mini round"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-label-group">
+            <span class="toggle-title">Reduced Motion</span>
+            <span class="toggle-desc">Quiet, gentle sway without heavy swinging</span>
+          </div>
+          <label class="switch-mini">
+            <input type="checkbox" id="motionToggle">
+            <span class="slider-mini round"></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button type="button" id="feedBtn" class="btn btn-feed" title="Drop a delicious snack treat for your buddy!">
+          <span class="btn-icon">🍎</span> Treat
+        </button>
+        <button type="button" id="jiggleBtn" class="btn btn-primary" title="Make the charm swing playfully">
+          <span class="btn-icon">🎈</span> Jiggle
+        </button>
+        <button type="button" id="resetPosBtn" class="btn btn-secondary" title="Re-center the charm to default position">
+          <span class="btn-icon">🎯</span> Center
+        </button>
+      </div>
+
+      <!-- Reset Settings Link -->
+      <div class="reset-link-wrap">
+        <button type="button" id="resetAllBtn" class="btn-text">Reset all settings to default</button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <div class="footer-links">
+        <span class="footer-tag">MIT Open-Source</span>
+        <a href="https://github.com/open-charms/open-charms" target="_blank" rel="noopener" class="footer-link">
+          GitHub
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="charms/charms.js"></script>
+  <script src="engine/audio.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

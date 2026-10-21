@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bear-grad" cx="45%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="60%" stop-color="#B45309"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </radialGradient>
+    <radialGradient id="snout-grad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </radialGradient>
+    <linearGradient id="tea-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FED7AA"/>
+      <stop offset="50%" stop-color="#FDBA74"/>
+      <stop offset="100%" stop-color="#FB923C"/>
+    </linearGradient>
+    <linearGradient id="boba-ring-metal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="50%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <filter id="bear-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <!-- Top Hanging Charm Ring -->
+  <g class="oc-charm-loop">
+    <circle cx="50" cy="8" r="6" fill="none" stroke="url(#boba-ring-metal)" stroke-width="2.5" filter="url(#bear-shadow)"/>
+    <circle cx="50" cy="8" r="4.2" fill="none" stroke="#FFFFFF" stroke-width="0.8" opacity="0.8"/>
+    <rect x="47" y="13" width="6" height="4" rx="1.5" fill="url(#boba-ring-metal)"/>
+  </g>
+
+  <!-- Left Round Ear -->
+  <g filter="url(#bear-shadow)">
+    <circle cx="28" cy="30" r="11" fill="url(#bear-grad)"/>
+    <circle cx="28" cy="30" r="6" fill="url(#snout-grad)"/>
+  </g>
+
+  <!-- Right Round Ear -->
+  <g filter="url(#bear-shadow)">
+    <circle cx="72" cy="30" r="11" fill="url(#bear-grad)"/>
+    <circle cx="72" cy="30" r="6" fill="url(#snout-grad)"/>
+  </g>
+
+  <!-- Bear Head -->
+  <ellipse cx="50" cy="48" rx="28" ry="24" fill="url(#bear-grad)" filter="url(#bear-shadow)"/>
+
+  <!-- Bear Body Base -->
+  <ellipse cx="50" cy="78" rx="25" ry="20" fill="url(#bear-grad)" filter="url(#bear-shadow)"/>
+
+  <!-- Snout / Muzzle -->
+  <ellipse cx="50" cy="52" rx="11" ry="8" fill="url(#snout-grad)"/>
+  <ellipse cx="50" cy="49" rx="3.5" ry="2.5" fill="#451A03"/>
+  <path d="M 46 54 Q 50 57 54 54" fill="none" stroke="#451A03" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Cheeks Blush -->
+  <ellipse cx="30" cy="53" rx="5" ry="3" fill="#F43F5E" opacity="0.45"/>
+  <ellipse cx="70" cy="53" rx="5" ry="3" fill="#F43F5E" opacity="0.45"/>
+
+  <!-- Eyes -->
+  <g class="oc-bear-eyes">
+    <circle cx="37" cy="45" r="3.8" fill="#451A03"/>
+    <circle cx="35.5" cy="43.5" r="1.4" fill="#FFFFFF"/>
+
+    <circle cx="63" cy="45" r="3.8" fill="#451A03"/>
+    <circle cx="61.5" cy="43.5" r="1.4" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Boba Milk Tea Cup Hugged in Front -->
+  <g filter="url(#bear-shadow)">
+    <!-- Diagonal Straw -->
+    <line x1="56" y1="58" x2="62" y2="44" stroke="#8B5CF6" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Cup Lid -->
+    <ellipse cx="50" cy="67" rx="14" ry="3" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="0.8"/>
+
+    <!-- Cup Body (Trapezoid) -->
+    <polygon points="37,68 63,68 60,94 40,94" fill="#FFFFFF" fill-opacity="0.3" stroke="#CBD5E1" stroke-width="0.8"/>
+    <!-- Liquid -->
+    <polygon points="38,72 62,72 59.5,93 40.5,93" fill="url(#tea-grad)"/>
+
+    <!-- Tapioca Pearls -->
+    <circle cx="44" cy="89" r="2.2" fill="#292524"/>
+    <circle cx="50" cy="90" r="2.4" fill="#1C1917"/>
+    <circle cx="56" cy="89" r="2.2" fill="#292524"/>
+    <circle cx="47" cy="85" r="2" fill="#1C1917"/>
+    <circle cx="53" cy="85" r="2" fill="#292524"/>
+
+    <!-- Cup Highlight Glass Reflection -->
+    <path d="M 40 73 L 42 91 L 44 91 L 42 73 Z" fill="#FFFFFF" opacity="0.4"/>
+  </g>
+
+  <!-- Bear Paws Hugging Cup -->
+  <g filter="url(#bear-shadow)">
+    <ellipse cx="37" cy="74" rx="5" ry="4" fill="#B45309"/>
+    <ellipse cx="63" cy="74" rx="5" ry="4" fill="#B45309"/>
+  </g>
+
+  <!-- Dangling Bear Feet -->
+  <g filter="url(#bear-shadow)">
+    <ellipse cx="34" cy="96" rx="6" ry="4.5" fill="#B45309"/>
+    <ellipse cx="34" cy="96" rx="3.5" ry="2.5" fill="#FDE68A"/>
+
+    <ellipse cx="66" cy="96" rx="6" ry="4.5" fill="#B45309"/>
+    <ellipse cx="66" cy="96" rx="3.5" ry="2.5" fill="#FDE68A"/>
+  </g>
+</svg>

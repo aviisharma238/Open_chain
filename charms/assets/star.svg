@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125" width="100%" height="100%">
+  <defs>
+    <radialGradient id="star-grad" cx="45%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#FEF9C3"/>
+      <stop offset="35%" stop-color="#FDE047"/>
+      <stop offset="80%" stop-color="#EAB308"/>
+      <stop offset="100%" stop-color="#CA8A04"/>
+    </radialGradient>
+    <linearGradient id="star-ring-metal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="50%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <linearGradient id="crystal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0E7FF"/>
+      <stop offset="50%" stop-color="#C7D2FE"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+    <filter id="star-glow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#F59E0B" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Top Hanging Charm Ring -->
+  <g class="oc-charm-loop">
+    <circle cx="50" cy="8" r="6" fill="none" stroke="url(#star-ring-metal)" stroke-width="2.5"/>
+    <circle cx="50" cy="8" r="4.2" fill="none" stroke="#FFFFFF" stroke-width="0.8" opacity="0.8"/>
+    <rect x="47" y="13" width="6" height="4" rx="1.5" fill="url(#star-ring-metal)"/>
+  </g>
+
+  <!-- Puffy Rounded Star Body -->
+  <!-- Hand-tuned smooth star path with rounded corners -->
+  <path d="M 50 17 
+           C 53 25, 59 34, 69 36 
+           C 78 38, 86 44, 88 51 
+           C 90 58, 81 66, 75 73 
+           C 70 79, 70 88, 66 95 
+           C 62 101, 52 101, 46 95 
+           C 40 89, 34 84, 26 80 
+           C 18 76, 11 68, 12 59 
+           C 13 50, 22 43, 31 40 
+           C 39 37, 46 27, 50 17 Z" 
+        fill="url(#star-grad)" 
+        filter="url(#star-glow)"/>
+
+  <!-- Star Highlight Shimmer -->
+  <path d="M 50 22 C 52 28, 56 34, 63 36 C 58 38, 52 35, 48 30 Z" fill="#FFFFFF" opacity="0.6"/>
+  <ellipse cx="36" cy="46" rx="4" ry="2.5" fill="#FFFFFF" opacity="0.5" transform="rotate(-30 36 46)"/>
+
+  <!-- Cheeks Blush -->
+  <ellipse cx="34" cy="64" rx="5.5" ry="3.5" fill="#F43F5E" opacity="0.45"/>
+  <ellipse cx="66" cy="64" rx="5.5" ry="3.5" fill="#F43F5E" opacity="0.45"/>
+
+  <!-- Star Sparkle Eyes -->
+  <g class="oc-star-eyes">
+    <circle cx="39" cy="56" r="4" fill="#78350F"/>
+    <circle cx="37.5" cy="54.5" r="1.5" fill="#FFFFFF"/>
+    <circle cx="40.5" cy="57.5" r="0.7" fill="#FFFFFF"/>
+
+    <circle cx="61" cy="56" r="4" fill="#78350F"/>
+    <circle cx="59.5" cy="54.5" r="1.5" fill="#FFFFFF"/>
+    <circle cx="62.5" cy="57.5" r="0.7" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Happy Smile -->
+  <path d="M 45 62 Q 50 67 55 62" fill="none" stroke="#78350F" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- Hanging Crystal Beads below Star -->
+  <g class="oc-star-dangles">
+    <!-- Left Tiny Chain & Bead -->
+    <line x1="38" y1="87" x2="35" y2="104" stroke="url(#star-ring-metal)" stroke-width="1.2" stroke-dasharray="1.5 1.5"/>
+    <polygon points="35,103 38,109 35,115 32,109" fill="url(#crystal-grad)"/>
+    <circle cx="35" cy="107" r="1" fill="#FFFFFF" opacity="0.8"/>
+
+    <!-- Center Tiny Chain & Bead -->
+    <line x1="50" y1="96" x2="50" y2="112" stroke="url(#star-ring-metal)" stroke-width="1.2" stroke-dasharray="1.5 1.5"/>
+    <polygon points="50,111 54,118 50,124 46,118" fill="url(#crystal-grad)"/>
+    <circle cx="50" cy="116" r="1.2" fill="#FFFFFF" opacity="0.9"/>
+
+    <!-- Right Tiny Chain & Bead -->
+    <line x1="62" y1="87" x2="65" y2="104" stroke="url(#star-ring-metal)" stroke-width="1.2" stroke-dasharray="1.5 1.5"/>
+    <polygon points="65,103 68,109 65,115 62,109" fill="url(#crystal-grad)"/>
+    <circle cx="65" cy="107" r="1" fill="#FFFFFF" opacity="0.8"/>
+  </g>
+</svg>

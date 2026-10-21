@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Charms — Interactive Test & Demo Suite</title>
+  <style>
+    :root {
+      --bg: #0F172A;
+      --card-bg: #1E293B;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --primary: #8B5CF6;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      min-height: 250vh; /* Long page to test scrolling inertia physics */
+      overflow-x: hidden;
+    }
+
+    /* Top Demo Nav */
+    header {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-group img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+
+    .brand-group h1 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #FFF 30%, #C4B5FD 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #34D399;
+      box-shadow: 0 0 6px #34D399;
+    }
+
+    /* Hero / Test Content */
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .hero-banner {
+      background: linear-gradient(145deg, #1E1B4B 0%, #1E293B 100%);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 16px;
+      padding: 36px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-banner h2 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #FFFFFF;
+    }
+
+    .hero-banner p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .test-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: #8B5CF6;
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: #7C3AED;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--card-bg);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: #334155;
+    }
+
+    /* Verification Checklist Card */
+    .checklist-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .checklist-card h3 {
+      font-size: 17px;
+      margin-bottom: 16px;
+      color: #E2E8F0;
+    }
+
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 14px;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .check-icon {
+      color: #10B981;
+      font-weight: bold;
+    }
+
+    /* Interactive Form Elements to test page non-blocking */
+    .form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px 14px;
+      background: #0F172A;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #FFF;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+    }
+
+    /* Floating Popup Simulator */
+    #popupSimulator {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 360px;
+      max-height: 580px;
+      background: #0B0F19;
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      z-index: 10000;
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+    }
+
+    #popupSimulator.open {
+      display: flex;
+    }
+
+    .sim-header {
+      background: #131B2E;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 600;
+      color: #C4B5FD;
+    }
+
+    .sim-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .sim-iframe {
+      width: 360px;
+      height: 520px;
+      border: none;
+    }
+
+    .sim-toggle-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+      color: #FFF;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 13.5px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease;
+    }
+
+    .sim-toggle-btn:hover {
+      transform: scale(1.05);
+    }
+  </style>
+
+  <!-- Load Extension Modules for Standalone Testing -->
+  <script src="../charms/charms.js"></script>
+  <script src="../engine/physics.js"></script>
+  <script src="../engine/audio.js"></script>
+  <script>
+    // Mock chrome APIs for standalone browser demo testing
+    if (typeof window.chrome === 'undefined') {
+      window.chrome = {};
+    }
+    const messageListeners = [];
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCharm = urlParams.get('charm') || 'cat';
+    const memoryStorage = {
+      openCharmsSettings: {
+        enabled: true,
+        selectedCharm: initialCharm,
+        charmSize: 85,
+        stringLength: 130,
+        animSpeed: 1.0,
+        swingIntensity: 1.0,
+        opacity: 100,
+        anchorRatio: 0.82,
+        stringStyle: 'golden-chain',
+        chainWave: 1.0,
+        soundEnabled: true,
+        reducedMotion: false
+      }
+    };
+
+    window.chrome.storage = {
+      local: {
+        get: (key) => Promise.resolve(key ? { [key]: memoryStorage[key] } : memoryStorage),
+        set: (obj) => {
+          Object.assign(memoryStorage, obj);
+          return Promise.resolve();
+        }
+      },
+      onChanged: {
+        addListener: (cb) => {}
+      }
+    };
+
+    window.chrome.runtime = {
+      onMessage: {
+        addListener: (fn) => messageListeners.push(fn)
+      },
+      sendMessage: (msg, cb) => {
+        messageListeners.forEach(fn => fn(msg, {}, cb || (() => {})));
+      }
+    };
+
+    window.chrome.tabs = {
+      query: (opts) => Promise.resolve([{ id: 1, url: window.location.href }]),
+      sendMessage: (tabId, msg, cb) => {
+        messageListeners.forEach(fn => fn(msg, {}, cb || (() => {})));
+      }
+    };
+  </script>
+  <script src="../content.js"></script>
+</head>
+<body>
+  <!-- Top Bar -->
+  <header>
+    <div class="brand-group">
+      <img src="../icons/icon32.png" alt="Open Charms">
+      <h1>Open Charms — Interactive Test & Demo Suite</h1>
+    </div>
+    <div class="status-badge">Extension Content Script Active</div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="hero-banner">
+      <h2>Look up at the ceiling! ✨</h2>
+      <p>
+        Your hanging companion is dangling at the top-right of this window. Try grabbing it with your mouse, dragging it across the screen, releasing it with a flick, or scrolling the page to see inertia and wavy chain ripples in action!
+      </p>
+      <div class="test-actions">
+        <button class="btn btn-primary" onclick="if(window.__OPEN_CHARMS_APP__) window.__OPEN_CHARMS_APP__.triggerJiggle()">
+          🎈 Test Jiggle Impulse
+        </button>
+        <button class="btn btn-primary" style="background: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%); box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);" onclick="testFeed()">
+          🍎 Feed Treat Minigame
+        </button>
+        <button class="btn btn-secondary" onclick="cycleCharm()">
+          🔄 Companion: <span id="charmNameText">Luna Cat 🐱</span>
+        </button>
+        <button class="btn btn-primary" style="background: linear-gradient(135deg, #0284C7 0%, #38BDF8 100%); box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);" onclick="setCharm('plane')">
+          ✈️ Select Aero Plane
+        </button>
+        <button class="btn btn-secondary" onclick="cycleAccessory()">
+          👑 Wardrobe: <span id="accModeText">None ✨</span>
+        </button>
+        <button class="btn btn-secondary" onclick="cycleStringStyle()">
+          🧵 Change String Style
+        </button>
+        <button class="btn btn-secondary" onclick="cycleWave()">
+          🌊 Wavy Motion: <span id="waveModeText">Fluid (1.0x)</span>
+        </button>
+        <button class="btn btn-secondary" onclick="toggleSimPopup()">
+          ⚙️ Open Extension Popup Simulator
+        </button>
+      </div>
+    </div>
+
+    <!-- Verification Checklist -->
+    <div class="checklist-card">
+      <h3>Interactive Verification Checklist</h3>
+      <div class="checklist-grid">
+        <div class="check-item">
+          <span class="check-icon">✓</span>
+          <div><strong>Pendulum Physics:</strong> Smooth damped swing with gravity and natural idle breeze.</div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✓</span>
+          <div><strong>Mouse Drag & Release:</strong> Drag anywhere with elastic stretch; release transfers inertia.</div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✓</span>
+          <div><strong>Repositioning:</strong> Drag charm or the top pin horizontally to slide its anchor.</div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✓</span>
+          <div><strong>Page Non-Interference:</strong> Webpage text selection, links, and forms are NOT blocked.</div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✓</span>
+          <div><strong>Scroll Reactive:</strong> Fast scrolling kicks the pendulum with realistic inertia.</div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✓</span>
+          <div><strong>Original Characters:</strong> 7 vector charms (Luna, Ribbit, Mochi, Twinkle, Spook, Boba, Aero Plane).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Form to test page non-blocking -->
+    <div class="form-card">
+      <h3>Test Webpage Interaction (Unblocked)</h3>
+      <p style="color: #94A3B8; font-size: 13.5px;">
+        Type in the field below or select text to confirm Open Charms does not interfere with standard web page UX.
+      </p>
+      <div class="input-row">
+        <input type="text" placeholder="Type here to test keyboard focus & text selection..." value="Hello Open Charms!">
+        <button class="btn btn-primary" onclick="alert('Webpage button clicked successfully without charm interference!')">
+          Click Me
+        </button>
+      </div>
+    </div>
+
+    <!-- Scroll test sections -->
+    <div class="checklist-card" style="margin-top: 100px;">
+      <h3>Scroll Testing Zone 1</h3>
+      <p style="color: #94A3B8;">Scroll down quickly to watch the charm react with an inertia impulse!</p>
+    </div>
+
+    <div class="checklist-card" style="margin-top: 300px;">
+      <h3>Scroll Testing Zone 2</h3>
+      <p style="color: #94A3B8;">Notice how the charm remains anchored to the top of the browser viewport while the page scrolls under it.</p>
+    </div>
+
+    <div class="checklist-card" style="margin-top: 300px;">
+      <h3>Scroll Testing Zone 3</h3>
+      <p style="color: #94A3B8;">You've reached the bottom of the test page! Scroll back up to see the reverse pendulum inertia kick.</p>
+    </div>
+  </main>
+
+  <!-- Toggle Popup Simulator Button -->
+  <button class="sim-toggle-btn" onclick="toggleSimPopup()">
+    <span>⚙️</span> Open Settings Popup
+  </button>
+
+  <!-- Embedded Popup Simulator -->
+  <div id="popupSimulator">
+    <div class="sim-header">
+      <span>EXTENSION POPUP PREVIEW</span>
+      <button class="sim-close" onclick="toggleSimPopup()">&times;</button>
+    </div>
+    <iframe class="sim-iframe" src="../popup.html"></iframe>
+  </div>
+
+  <script>
+    const charms = ['cat', 'frog', 'bunny', 'star', 'ghost', 'boba', 'plane'];
+    const charmLabels = {
+      cat: 'Luna Cat 🐱',
+      frog: 'Ribbit Frog 🐸',
+      bunny: 'Mochi Bunny 🐰',
+      star: 'Twinkle Star ⭐',
+      ghost: 'Spook Ghost 👻',
+      boba: 'Boba Bear 🐻',
+      plane: 'Aero Plane ✈️'
+    };
+    let cIdx = 0;
+    function cycleCharm() {
+      cIdx = (cIdx + 1) % charms.length;
+      setCharm(charms[cIdx]);
+    }
+
+    function setCharm(id) {
+      const idx = charms.indexOf(id);
+      if (idx !== -1) cIdx = idx;
+      const lbl = document.getElementById('charmNameText');
+      if (lbl) lbl.textContent = charmLabels[id] || id;
+      if (window.__OPEN_CHARMS_APP__) {
+        window.__OPEN_CHARMS_APP__.settings.selectedCharm = id;
+        window.__OPEN_CHARMS_APP__.applySettings();
+      }
+    }
+
+    if (initialCharm) {
+      const idx = charms.indexOf(initialCharm);
+      if (idx !== -1) cIdx = idx;
+      window.addEventListener('DOMContentLoaded', () => {
+        const lbl = document.getElementById('charmNameText');
+        if (lbl && charmLabels[initialCharm]) {
+          lbl.textContent = charmLabels[initialCharm];
+        }
+      });
+    }
+
+    const stringStyles = ['golden-chain', 'silver-chain', 'pastel-ribbon', 'rainbow-thread', 'black-choker'];
+    let sIdx = 0;
+    function cycleStringStyle() {
+      sIdx = (sIdx + 1) % stringStyles.length;
+      if (window.__OPEN_CHARMS_APP__) {
+        window.__OPEN_CHARMS_APP__.settings.stringStyle = stringStyles[sIdx];
+        window.__OPEN_CHARMS_APP__.applySettings();
+      }
+    }
+
+    const waveModes = [
+      { val: 1.0, label: 'Fluid (1.0x)' },
+      { val: 1.8, label: 'Hyper Wavy (1.8x)' },
+      { val: 0.0, label: 'Taut / Straight (0.0x)' },
+      { val: 0.5, label: 'Subtle Flex (0.5x)' }
+    ];
+    let wIdx = 0;
+    function cycleWave() {
+      wIdx = (wIdx + 1) % waveModes.length;
+      const mode = waveModes[wIdx];
+      document.getElementById('waveModeText').textContent = mode.label;
+      if (window.__OPEN_CHARMS_APP__) {
+        window.__OPEN_CHARMS_APP__.settings.chainWave = mode.val;
+        window.__OPEN_CHARMS_APP__.applySettings();
+        window.__OPEN_CHARMS_APP__.triggerJiggle();
+      }
+    }
+
+    function toggleSimPopup() {
+      const sim = document.getElementById('popupSimulator');
+      sim.classList.toggle('open');
+    }
+
+    function testFeed() {
+      if (window.__OPEN_CHARMS_APP__) {
+        window.__OPEN_CHARMS_APP__.spawnSnack();
+      }
+    }
+
+    const accessories = ['none', 'crown', 'witch-hat', 'glasses', 'flower', 'bowtie'];
+    const accessoryLabels = {
+      none: 'None ✨',
+      crown: 'Crown 👑',
+      'witch-hat': 'Witch Hat 🧙‍♀️',
+      glasses: 'Glasses 👓',
+      flower: 'Sakura 🌸',
+      bowtie: 'Bowtie 🎀'
+    };
+    let aIdx = 0;
+    function cycleAccessory() {
+      aIdx = (aIdx + 1) % accessories.length;
+      const acc = accessories[aIdx];
+      document.getElementById('accModeText').textContent = accessoryLabels[acc] || acc;
+      if (window.__OPEN_CHARMS_APP__) {
+        window.__OPEN_CHARMS_APP__.settings.accessory = acc;
+        window.__OPEN_CHARMS_APP__.applySettings();
+      }
+    }
+  </script>
+</body>
+</html>

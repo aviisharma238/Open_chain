@@ -1,0 +1,247 @@
+/* ==========================================================================
+   Open Charms — Content Shadow DOM Stylesheet
+   Isolated inside Shadow DOM: cannot conflict with or be overridden by web pages.
+   ========================================================================== */
+
+:host {
+  all: initial;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2147483647;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.oc-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Top Anchor Mount (Ceiling Pin / Clasp)
+   -------------------------------------------------------------------------- */
+.oc-anchor-mount {
+  position: absolute;
+  top: 0;
+  width: 22px;
+  height: 11px;
+  transform: translateX(-50%);
+  pointer-events: auto;
+  cursor: ew-resize;
+  z-index: 10;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background: linear-gradient(180deg, #FCD34D 0%, #D97706 100%);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.oc-anchor-mount:hover {
+  filter: brightness(1.15);
+  transform: translateX(-50%) scale(1.1);
+}
+
+.oc-anchor-mount::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #F59E0B;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   String & Chain SVG Layer
+   -------------------------------------------------------------------------- */
+.oc-string-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.oc-chain-link {
+  filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25));
+}
+
+/* --------------------------------------------------------------------------
+   Hanging Charm Character Wrapper
+   -------------------------------------------------------------------------- */
+.oc-charm-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+  cursor: grab;
+  will-change: transform;
+  transform-origin: 50% 8px; /* Rotates about the top hanging ring */
+  touch-action: none;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.16));
+  transition: filter 0.2s ease;
+}
+
+.oc-charm-container:active,
+.oc-charm-container.is-dragging {
+  cursor: grabbing !important;
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.28)) scale(1.03);
+}
+
+.oc-charm-svg-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: 50% 12px;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.oc-charm-svg-wrap svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* --------------------------------------------------------------------------
+   Playful Micro-Animations (Blinking eyes, breathing)
+   -------------------------------------------------------------------------- */
+@keyframes oc-blink {
+  0%, 94%, 98%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.08);
+  }
+}
+
+.oc-cat-eyes,
+.oc-frog-eyes,
+.oc-bunny-eyes,
+.oc-star-eyes,
+.oc-ghost-eyes,
+.oc-bear-eyes,
+.oc-plane-eyes {
+  transform-origin: center;
+  animation: oc-blink 5.5s infinite ease-in-out;
+}
+
+/* Plane Propeller Spin Micro-Animation */
+@keyframes oc-propeller-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.oc-plane-propeller {
+  transform-origin: 50px 86px;
+  animation: oc-propeller-spin 0.22s linear infinite;
+}
+
+/* Chain Link Polish */
+.oc-chain-link {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.22));
+}
+
+/* Happy Poke Jiggle Animation */
+@keyframes oc-jiggle {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.14) rotate(-5deg); }
+  50% { transform: scale(0.95) rotate(4deg); }
+  75% { transform: scale(1.05) rotate(-2deg); }
+  100% { transform: scale(1); }
+}
+
+.oc-charm-container.is-poked .oc-charm-svg-wrap {
+  animation: oc-jiggle 0.45s ease-out;
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility: Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .oc-cat-eyes,
+  .oc-frog-eyes,
+  .oc-bunny-eyes,
+  .oc-star-eyes,
+  .oc-ghost-eyes,
+  .oc-bear-eyes,
+  .oc-plane-eyes,
+  .oc-plane-propeller {
+    animation: none !important;
+  }
+  .oc-charm-container {
+    transition: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Interactive Snack Minigame & Particle Bursts
+   -------------------------------------------------------------------------- */
+.oc-snack-item {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 20;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+  animation: oc-float 2.2s infinite ease-in-out;
+}
+
+@keyframes oc-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(6deg); }
+}
+
+.oc-snack-item:hover {
+  transform: scale(1.2);
+}
+
+.oc-crumb {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  animation: oc-particle 0.65s forwards ease-out;
+}
+
+@keyframes oc-particle {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+
+.oc-heart-float {
+  position: absolute;
+  pointer-events: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: #EC4899;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  animation: oc-float-up 1.1s forwards ease-out;
+}
+
+@keyframes oc-float-up {
+  0% { transform: translate(-50%, 0) scale(0.6); opacity: 0; }
+  25% { transform: translate(-50%, -15px) scale(1.2); opacity: 1; }
+  100% { transform: translate(-50%, -45px) scale(0.9); opacity: 0; }
+}
